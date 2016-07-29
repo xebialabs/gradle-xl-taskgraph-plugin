@@ -42,6 +42,10 @@ release {
   grgit = org.ajoberstar.grgit.Grgit.open()
 }
 
+tasks.release.dependsOn([clean, build, uploadArchives])
+
+tasks.build.shouldRunAfter tasks.clean
+
 uploadArchives {
   repositories.mavenDeployer {
     repository(url: "${project.property("nexusBaseUrl")}/repositories/releases") {
