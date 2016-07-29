@@ -13,11 +13,11 @@ class TaskGraphPlugin implements Plugin<Project> {
   private static Project root = null
   private static Date start;
   static def defaultUninterestingTasks = [
-          "compileJava",
-          "compileScala",
-          "checkJavaVersion",
-          "processResources",
-          "classes"
+      "compileJava",
+      "compileScala",
+      "checkJavaVersion",
+      "processResources",
+      "classes"
   ]
 
   @Override
@@ -27,7 +27,9 @@ class TaskGraphPlugin implements Plugin<Project> {
       return
     }
 
-    if (root != null) { return }
+    if (root != null) {
+      return
+    }
 
     root = project.rootProject
 
@@ -57,8 +59,14 @@ class TaskGraphPlugin implements Plugin<Project> {
     tasks.each { task ->
       task.getTaskDependencies().getDependencies().each { deptask ->
         log.debug("Task " + task.path + " depends on " + deptask.path)
-        allTaskNodes.get(task).subtasks.add(deptask)
-        allTaskNodes.get(deptask).referencedByTasks.add(task)
+        def tasknode = allTaskNodes.get(task)
+        def deptasknode = allTaskNodes.get(deptask)
+        if (deptasknode != null) {
+          tasknode.subtasks.add(deptask)
+          deptasknode.referencedByTasks.add(task)
+        } else {
+          log.info("task ${task.path} depends on task ${deptask.path}, but it was excluded from the build")
+        }
       }
     }
 
