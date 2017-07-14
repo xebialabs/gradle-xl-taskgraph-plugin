@@ -11,6 +11,8 @@ Include this in your root project's build.gradle:
     }
     apply plugin: "xebialabs.taskgraph"
 
+The plugin is installed in XebiaLabs' Nexus, so make sure your gradle knows about this repository, e.g. by applying the xebialabs.opinions plugin
+
 Optional, but very handy: install `dot` from the GraphViz package, and add a line to your `gradle.properties`:
 
     dotExecutable=/path/to/graphviz/dot
@@ -37,6 +39,9 @@ Tasks with these names are, by default, omitted from the graph:
 * `checkJavaVersion`
 * `processResources`
 * `classes`
+* `testClasses`
+* `compileTestJava`
+* `compileTestScala`
 
 When task A depends transitively on some other task B via a task in this list, a dotted line is used.
  
