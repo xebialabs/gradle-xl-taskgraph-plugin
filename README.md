@@ -23,12 +23,13 @@ Then, run your gradle task with the `-Ptaskgraph` switch:
 
 After gradle's configuration stage, there will be a new file `<rootProject>/build/taskgraph.png` containing a visual representation of the task graph. (The corresponding `.txt` file contains its source.)
 
-# --no-daemon
+# -m (dry-run)
  
-The daemon doesn't play nice here and may cause taskgraph generation to be skipped. In that case the gradle option `--no-daemon` is your friend. If you don't want to re-run the full task, combine it with `-m` which effectively skips all tasks (dry-run) leaving only task configuration and taskgraph generation. So, e.g.:
+If you don't want to (re-)execute a gradle task, but you do want to see what would be triggered, use gradle's `-m` switch which effectively skips all tasks (dry-run) leaving only task configuration and taskgraph generation - the task graph will still be generated So, e.g.:
 
-    ./gradlew build -Ptaskgraph --no-daemon -m
-    
+    ./gradlew build -Ptaskgraph -m
+
+will give you the task graph in 3 seconds on XL Deploy (as of july 2017)
 
 # Omitted tasks
 

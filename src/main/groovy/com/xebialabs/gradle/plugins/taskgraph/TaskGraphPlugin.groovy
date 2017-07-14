@@ -40,6 +40,7 @@ class TaskGraphPlugin implements Plugin<Project> {
       log.info "Generating task graph..."
       generateGraphTxt()
       convertToPng()
+      root = null
     }
   }
 
