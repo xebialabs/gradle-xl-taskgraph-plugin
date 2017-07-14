@@ -17,7 +17,10 @@ class TaskGraphPlugin implements Plugin<Project> {
       "compileScala",
       "checkJavaVersion",
       "processResources",
-      "classes"
+      "classes",
+      "testClasses",
+      "compileTestJava",
+      "compileTestScala"
   ]
 
   @Override
