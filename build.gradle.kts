@@ -55,7 +55,7 @@ dependencies {
 
 publishing {
     publications {
-        create<MavenPublication>("maven") {
+        register("pluginMaven", MavenPublication::class) {
             from(components["java"])
         }
     }
