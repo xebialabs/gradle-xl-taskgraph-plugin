@@ -58,7 +58,7 @@ publishing {
         register("pluginMaven", MavenPublication::class) {
             from(components["java"])
 
-            artifactId = "gradle-xl-taskgraph-plugin-test"
+            artifactId = "gradle-xl-taskgraph-plugin"
         }
     }
     repositories {
