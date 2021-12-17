@@ -69,3 +69,31 @@ publishing {
         }
     }
 }
+
+tasks {
+    register<NebulaRelease>("nebulaRelease")
+
+    named<Upload>("uploadArchives") {
+        dependsOn(named("publish"))
+    }
+
+    register("dumpVersion") {
+        doLast {
+            file(buildDir).mkdirs()
+            file("$buildDir/version.dump").writeText("version=${releasedVersion}")
+        }
+    }
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+
+    withType<ValidatePlugins>().configureEach {
+        failOnWarning.set(false)
+        enableStricterValidation.set(false)
+    }
+}
