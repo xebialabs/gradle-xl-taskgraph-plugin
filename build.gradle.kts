@@ -57,6 +57,8 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
+
+            artifactId = "gradle-xl-taskgraph-plugin-test"
         }
     }
     repositories {
